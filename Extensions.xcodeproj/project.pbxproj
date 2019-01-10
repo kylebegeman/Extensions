@@ -118,9 +118,9 @@
 		E6F40D8221E6B2EB00C2E404 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E6F40D8B21E6B31100C2E404 /* Source */,
 				E6F40D8321E6B2EB00C2E404 /* Extensions.h */,
 				E6F40D8421E6B2EB00C2E404 /* Info.plist */,
-				E6F40D8B21E6B31100C2E404 /* Source */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
