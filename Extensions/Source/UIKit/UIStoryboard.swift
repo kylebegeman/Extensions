@@ -8,6 +8,38 @@
 
 import UIKit
 
+/// Basic protocol for storyboard file nameing
+///
+/// Example use:
+///
+///     enum StoryboardItem: String, StoryboardNameable {
+///         case application
+///         case onboarding
+
+///     public var name: String {
+///         return self.rawValue
+///     }
+/// }
+///
+/// let storyboard = UIStoryboad(storyboard: .application)
+///
+public protocol StoryboardNameable {
+    var name: String { get }
+}
+
+/// Basic protocol for type restrictions & generics.
+public protocol StoryboardIdentifiable {
+    static var storyboardId: String { get }
+}
+
+// Default a UIViewControllers storyboard id to its class name.
+extension StoryboardIdentifiable where Self: UIViewController {
+    public static var storyboardId: String { return String(describing: self) }
+}
+
+// Universal conformance to StoryboadIdentifiable
+extension UIViewController: StoryboardIdentifiable {}
+
 // Stroybaord extension
 public extension UIStoryboard {
 

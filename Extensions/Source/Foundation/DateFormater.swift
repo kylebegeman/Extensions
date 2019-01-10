@@ -16,9 +16,9 @@ public enum DateFormat {
 
     var formatString: String {
         switch self {
-        case .short:    return .dateFormatShort
-        case .medium:   return .dateFormatMedium
-        case .large:    return .dateFormatLong
+        case .short:    return "M/d"
+        case .medium:   return "yyyy-MM-dd"
+        case .large:    return "yyyy-MM-dd'T'HH:mm:ss.000Z"
         }
     }
 

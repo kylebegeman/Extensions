@@ -49,9 +49,9 @@ public extension UIViewController {
     ///
     /// - Parameter child: the child view controller to add.
     func add(_ child: UIViewController) {
-        addChildViewController(child)
+        addChild(child)
         view.addSubview(child.view)
-        child.didMove(toParentViewController: self)
+        child.didMove(toParent: self)
     }
 
     /// Remove from the parrent view controller; will manage all containment method calls.
@@ -60,8 +60,8 @@ public extension UIViewController {
             return
         }
 
-        willMove(toParentViewController: nil)
-        removeFromParentViewController()
+        willMove(toParent: nil)
+        removeFromParent()
         view.removeFromSuperview()
     }
 

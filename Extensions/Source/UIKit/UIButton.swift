@@ -90,7 +90,7 @@ public extension UIButton {
 public extension UIButton {
 
     // Reference for looping all states
-    private var states: [UIControlState] {
+    private var states: [UIControl.State] {
         return [.normal, .selected, .highlighted, .disabled]
     }
 

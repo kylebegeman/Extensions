@@ -108,10 +108,10 @@ public extension UIView {
         }
 
         switch animationType {
-        case .linear:       animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        case .easeIn:       animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        case .easeOut:      animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        case .easeInOut:    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        case .linear:       animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        case .easeIn:       animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        case .easeOut:      animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+        case .easeInOut:    animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         }
 
         CATransaction.setCompletionBlock(completion)
@@ -151,8 +151,8 @@ public extension UIView {
         /// - regular: regular, or, linear animation
         /// - spring: spring based animation with velocity and bounce.
         public enum AnimationType {
-            case regular(duration: TimeInterval, delay: TimeInterval, options: UIViewAnimationOptions)
-            case spring(duration: TimeInterval, delay: TimeInterval, damping: CGFloat, velocity: CGFloat, options: UIViewAnimationOptions)
+            case regular(duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions)
+            case spring(duration: TimeInterval, delay: TimeInterval, damping: CGFloat, velocity: CGFloat, options: UIView.AnimationOptions)
         }
 
         /// Local properties for managing animation
@@ -168,12 +168,12 @@ public extension UIView {
         }
 
         /// Convenience initializer for Apple SDK continuity.
-        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, options: UIViewAnimationOptions = []) {
+        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, options: UIView.AnimationOptions = []) {
             self.init(animationType: .regular(duration: duration, delay: delay, options: options))
         }
 
         /// Convenience initializer for Apple SDK continuity.
-        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, damping: CGFloat, velocity: CGFloat, options: UIViewAnimationOptions = []) {
+        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, damping: CGFloat, velocity: CGFloat, options: UIView.AnimationOptions = []) {
             self.init(animationType: .spring(duration: duration, delay: delay, damping: damping, velocity: velocity, options: options))
         }
 
