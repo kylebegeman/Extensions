@@ -13,32 +13,32 @@ import UIKit
 public extension Int {
 
     /// Radian value of degree input.
-    public var degreesToRadians: Double {
+    var degreesToRadians: Double {
         return Double.pi * Double(self) / 180.0
     }
 
     /// Degree value of radian input
-    public var radiansToDegrees: Double {
+    var radiansToDegrees: Double {
         return Double(self) * 180 / Double.pi
     }
 
     /// UInt.
-    public var uInt: UInt {
+    var uInt: UInt {
         return UInt(self)
     }
 
     /// Double.
-    public var double: Double {
+    var double: Double {
         return Double(self)
     }
 
     /// Float.
-    public var float: Float {
+    var float: Float {
         return Float(self)
     }
 
     /// CGFloat.
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
 
@@ -53,7 +53,7 @@ public extension Int {
     ///   - min: minimum number to start random from.
     ///   - max: maximum number random number end before.
     /// - Returns: random double between two double values.
-    public static func random(between min: Int, and max: Int) -> Int {
+    static func random(between min: Int, and max: Int) -> Int {
         return random(inRange: min...max)
     }
 
@@ -61,7 +61,7 @@ public extension Int {
     ///
     /// - Parameter range: closed interval range.
     /// - Returns: random double in the given closed range.
-    public static func random(inRange range: ClosedRange<Int>) -> Int {
+    static func random(inRange range: ClosedRange<Int>) -> Int {
         let delta = UInt32(range.upperBound - range.lowerBound + 1)
         return range.lowerBound + Int(arc4random_uniform(delta))
     }

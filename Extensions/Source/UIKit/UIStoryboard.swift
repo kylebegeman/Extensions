@@ -16,7 +16,7 @@ import UIKit
 ///         case application
 ///         case onboarding
 
-///     public var name: String {
+///     var name: String {
 ///         return self.rawValue
 ///     }
 /// }
@@ -44,7 +44,7 @@ extension UIViewController: StoryboardIdentifiable {}
 public extension UIStoryboard {
 
     /// Get main storyboard for application
-    public static var mainStoryboard: UIStoryboard? {
+    static var mainStoryboard: UIStoryboard? {
         let bundle = Bundle.main
         guard let name = bundle.object(forInfoDictionaryKey: "UIMainStoryboardFile") as? String else { return nil }
         return UIStoryboard(name: name, bundle: bundle)
@@ -55,7 +55,7 @@ public extension UIStoryboard {
     /// - Parameters:
     ///   - storyboard: 'Storyboard' object to initialize
     ///   - bundle: The project bundle; default is nil
-    public convenience init(storyboard: StoryboardNameable, bundle: Bundle? = nil) {
+    convenience init(storyboard: StoryboardNameable, bundle: Bundle? = nil) {
         self.init(name: storyboard.name, bundle: bundle)
     }
 
@@ -64,7 +64,7 @@ public extension UIStoryboard {
     ///         let controller: SomeController = aStoryboad.instantiateViewController()
     ///
     /// - Returns: T (generic value)
-    public func instantiateViewController<T: StoryboardIdentifiable>() -> T {
+    func instantiateViewController<T: StoryboardIdentifiable>() -> T {
         guard let controller = self.instantiateViewController(withIdentifier: T.storyboardId) as? T else {
             fatalError("Couldn’t instantiate view controller with identifier \(T.storyboardId)")
         }

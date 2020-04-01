@@ -13,7 +13,7 @@ import UIKit
 public extension UIColor {
 
     /// Random color.
-    public static var random: UIColor {
+    static var random: UIColor {
         let r = CGFloat(arc4random_uniform(255))
         let g = CGFloat(arc4random_uniform(255))
         let b = CGFloat(arc4random_uniform(255))
@@ -22,33 +22,33 @@ public extension UIColor {
     }
 
     /// Red component of UIColor (get-only)
-    public var redComponent: Int {
+    var redComponent: Int {
         var r: CGFloat = 0
         getRed(&r, green: nil, blue: nil, alpha: nil)
         return Int(r * 255)
     }
 
     /// Green component of UIColor (get-only)
-    public var greenComponent: Int {
+    var greenComponent: Int {
         var g: CGFloat = 0
         getRed(nil, green: &g, blue: nil, alpha: nil)
         return Int(g * 255)
     }
 
     /// Blue component of UIColor (get-only)
-    public var blueComponent: Int {
+    var blueComponent: Int {
         var b: CGFloat = 0
         getRed(nil, green: nil, blue: &b, alpha: nil)
         return Int(b * 255)
     }
 
     /// Alpha of UIColor (read-only).
-    public var alpha: CGFloat {
+    var alpha: CGFloat {
         return cgColor.alpha
     }
 
     /// Hexadecimal value string (read-only).
-    public var hexString: String {
+    var hexString: String {
         let components: [Int] = {
             let c = cgColor.components!
             let components = c.count == 4 ? c : [c[0], c[0], c[0], c[1]]
@@ -71,7 +71,7 @@ public extension UIColor {
     ///   - green: green component.
     ///   - blue: blue component.
     ///   - transparency: optional transparency value (default is 1).
-    public convenience init?(red: Int, green: Int, blue: Int, transparency: CGFloat = 1) {
+    convenience init?(red: Int, green: Int, blue: Int, transparency: CGFloat = 1) {
         guard red >= 0 && red <= 255 else { return nil }
         guard green >= 0 && green <= 255 else { return nil }
         guard blue >= 0 && blue <= 255 else { return nil }
@@ -90,7 +90,7 @@ public extension UIColor {
      - parameter hex3: Three-digit hexadecimal value.
      - parameter alpha: 0.0 - 1.0. The default is 1.0.
      */
-    public convenience init(hex3: UInt16, alpha: CGFloat = 1) {
+    convenience init(hex3: UInt16, alpha: CGFloat = 1) {
         let divisor = CGFloat(15)
         let red = CGFloat((hex3 & 0xF00) >> 8) / divisor
         let green = CGFloat((hex3 & 0x0F0) >> 4) / divisor
@@ -104,7 +104,7 @@ public extension UIColor {
 
      - parameter hex4: Four-digit hexadecimal value.
      */
-    public convenience init(hex4: UInt16) {
+    convenience init(hex4: UInt16) {
         let divisor = CGFloat(15)
         let red = CGFloat((hex4 & 0xF000) >> 12) / divisor
         let green = CGFloat((hex4 & 0x0F00) >> 8) / divisor
@@ -118,7 +118,7 @@ public extension UIColor {
 
      - parameter hex6: Six-digit hexadecimal value.
      */
-    public convenience init(hex6: UInt32, alpha: CGFloat = 1) {
+    convenience init(hex6: UInt32, alpha: CGFloat = 1) {
         let divisor = CGFloat(255)
         let red = CGFloat((hex6 & 0xFF0000) >> 16) / divisor
         let green = CGFloat((hex6 & 0x00FF00) >> 8) / divisor
@@ -131,7 +131,7 @@ public extension UIColor {
 
      - parameter hex8: Eight-digit hexadecimal value.
      */
-    public convenience init(hex8: UInt32) {
+    convenience init(hex8: UInt32) {
         let divisor = CGFloat(255)
         let red = CGFloat((hex8 & 0xFF000000) >> 24) / divisor
         let green = CGFloat((hex8 & 0x00FF0000) >> 16) / divisor
@@ -145,7 +145,7 @@ public extension UIColor {
 
      - parameter rgba: String value.
      */
-    public convenience init(rgba_throws rgba: String) throws {
+    convenience init(rgba_throws rgba: String) throws {
         guard rgba.hasPrefix("#") else {
             let error = UIColorInputError.missingHashMarkAsPrefix(rgba)
             print(error.localizedDescription)
@@ -182,7 +182,7 @@ public extension UIColor {
 
      - parameter rgba: String value.
      */
-    public convenience init(_ rgba: String, defaultColor: UIColor = UIColor.clear) {
+    convenience init(_ rgba: String, defaultColor: UIColor = UIColor.clear) {
         guard let color = try? UIColor(rgba_throws: rgba) else {
             self.init(cgColor: defaultColor.cgColor)
             return
@@ -195,7 +195,7 @@ public extension UIColor {
 
      - parameter includeAlpha: Whether the alpha should be included.
      */
-    public func hexStringThrows(_ includeAlpha: Bool = true) throws -> String {
+    func hexStringThrows(_ includeAlpha: Bool = true) throws -> String {
         var r: CGFloat = 0  //swiftlint:disable:this identifier_name
         var g: CGFloat = 0  //swiftlint:disable:this identifier_name
         var b: CGFloat = 0  //swiftlint:disable:this identifier_name
@@ -220,7 +220,7 @@ public extension UIColor {
 
      - parameter includeAlpha: Whether the alpha should be included.
      */
-    public func hexString(_ includeAlpha: Bool = true) -> String {
+    func hexString(_ includeAlpha: Bool = true) -> String {
         guard let hexString = try? hexStringThrows(includeAlpha) else {
             return ""
         }
@@ -231,7 +231,7 @@ public extension UIColor {
 
 // MARK: - Color Errors
 
-public enum UIColorInputError: Error {
+enum UIColorInputError: Error {
     case missingHashMarkAsPrefix(String)
     case unableToScanHexValue(String)
     case mismatchedHexStringLength(String)

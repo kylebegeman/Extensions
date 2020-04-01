@@ -11,7 +11,7 @@ import UIKit
 public extension UIFont {
 
     /// Print out font family names, including custom fonts added to the project.
-    public class func printFontFamilies() {
+    class func printFontFamilies() {
         for family in UIFont.familyNames {
             print("")
             print("-----------------------------------")

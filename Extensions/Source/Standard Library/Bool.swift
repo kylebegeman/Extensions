@@ -17,7 +17,7 @@ public extension Bool {
     ///        false.int -> 0
     ///        true.int -> 1
     ///
-    public var int: Int {
+    var int: Int {
         return self ? 1 : 0
     }
 
@@ -26,7 +26,7 @@ public extension Bool {
     ///        false.string -> "false"
     ///        true.string -> "true"
     ///
-    public var string: String {
+    var string: String {
         return description
     }
 
@@ -35,7 +35,7 @@ public extension Bool {
     ///        false.toggled -> true
     ///        true.toggled -> false
     ///
-    public var toggled: Bool {
+    var toggled: Bool {
         return !self
     }
 
@@ -44,7 +44,7 @@ public extension Bool {
     ///     Bool.random -> true
     ///     Bool.random -> false
     ///
-    public static var random: Bool {
+    static var random: Bool {
         return arc4random_uniform(2) == 1
     }
 
@@ -61,7 +61,7 @@ public extension Bool {
     ///        print(bool) -> true
     ///
     /// - Returns: inversed value of bool.
-    @discardableResult public mutating func toggle() -> Bool {
+    @discardableResult mutating func toggle() -> Bool {
         self = !self
         return self
     }

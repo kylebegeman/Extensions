@@ -16,7 +16,7 @@ public extension String {
     ///        "Hello World!"[20] -> nil
     ///
     /// - Parameter i: index.
-    public subscript(safe i: Int) -> Character? {
+    subscript(safe i: Int) -> Character? {
         guard i >= 0 && i < count else { return nil }
         return self[index(startIndex, offsetBy: i)]
     }
@@ -27,7 +27,7 @@ public extension String {
     ///        "Hello World!"[21..<110] -> nil
     ///
     /// - Parameter range: Half-open range.
-    public subscript(safe range: CountableRange<Int>) -> String? {
+    subscript(safe range: CountableRange<Int>) -> String? {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex) else { return nil }
         guard let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) else { return nil }
         return String(self[lowerIndex..<upperIndex])
@@ -39,7 +39,7 @@ public extension String {
     ///        "Hello World!"[21...110] -> nil
     ///
     /// - Parameter range: Closed range.
-    public subscript(safe range: ClosedRange<Int>) -> String? {
+    subscript(safe range: ClosedRange<Int>) -> String? {
         guard let lowerIndex = index(startIndex, offsetBy: max(0, range.lowerBound), limitedBy: endIndex) else { return nil }
         guard let upperIndex = index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) else { return nil }
         return String(self[lowerIndex..<upperIndex])
@@ -54,7 +54,7 @@ public extension String {
     ///   - string: substring to search for.
     ///   - caseSensitive: set true for case sensitive search (default is true).
     /// - Returns: true if string contains one or more instance of substring.
-    public func contains(_ string: String, caseSensitive: Bool = true) -> Bool {
+    func contains(_ string: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return range(of: string, options: .caseInsensitive) != nil
         }
@@ -65,7 +65,7 @@ public extension String {
     ///
     /// - Parameter pattern: Pattern to verify.
     /// - Returns: true if string matches the pattern.
-    public func matches(pattern: String) -> Bool {
+    func matches(pattern: String) -> Bool {
         return range(of: pattern,
                      options: String.CompareOptions.regularExpression,
                      range: nil, locale: nil) != nil
@@ -80,7 +80,7 @@ public extension String {
     ///   - suffix: substring to search if string starts with.
     ///   - caseSensitive: set true for case sensitive search (default is true).
     /// - Returns: true if string starts with substring.
-    public func starts(with prefix: String, caseSensitive: Bool = true) -> Bool {
+    func starts(with prefix: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return lowercased().hasPrefix(prefix.lowercased())
         }
@@ -96,7 +96,7 @@ public extension String {
     ///   - suffix: substring to search if string ends with.
     ///   - caseSensitive: set true for case sensitive search (default is true).
     /// - Returns: true if string ends with substring.
-    public func ends(with suffix: String, caseSensitive: Bool = true) -> Bool {
+    func ends(with suffix: String, caseSensitive: Bool = true) -> Bool {
         if !caseSensitive {
             return lowercased().hasSuffix(suffix.lowercased())
         }
@@ -134,7 +134,7 @@ public extension String {
     ///   - string: substring to search for.
     ///   - caseSensitive: set true for case sensitive search (default is true).
     /// - Returns: count of appearance of substring in string.
-    public func count(of string: String, caseSensitive: Bool = true) -> Int {
+    func count(of string: String, caseSensitive: Bool = true) -> Int {
         if !caseSensitive {
             return lowercased().components(separatedBy: string.lowercased()).count - 1
         }
@@ -145,7 +145,7 @@ public extension String {
     ///
     ///        "john@doe.com".isEmail -> true
     ///
-    public var isEmail: Bool {
+    var isEmail: Bool {
         // http://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
         return matches(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
     }
@@ -155,7 +155,7 @@ public extension String {
     ///        "https://google.com".url -> URL(string: "https://google.com")
     ///        "not url".url -> nil
     ///
-    public var url: URL? {
+    var url: URL? {
         return URL(string: self)
     }
 
@@ -163,7 +163,7 @@ public extension String {
     ///
     ///        "https://google.com".isValidUrl -> true
     ///
-    public var isValidUrl: Bool {
+    var isValidUrl: Bool {
         return URL(string: self) != nil
     }
 
@@ -172,7 +172,7 @@ public extension String {
     ///        "https://google.com".isValidSchemedUrl -> true
     ///        "google.com".isValidSchemedUrl -> false
     ///
-    public var isValidSchemedUrl: Bool {
+    var isValidSchemedUrl: Bool {
         guard let url = URL(string: self) else { return false }
         return url.scheme != nil
     }
@@ -181,7 +181,7 @@ public extension String {
     ///
     ///        "https://google.com".isValidHttpsUrl -> true
     ///
-    public var isValidHttpsUrl: Bool {
+    var isValidHttpsUrl: Bool {
         guard let url = URL(string: self) else { return false }
         return url.scheme == "https"
     }
@@ -190,7 +190,7 @@ public extension String {
     ///
     ///        "file://Documents/file.txt".isValidFileUrl -> true
     ///
-    public var isValidFileUrl: Bool {
+    var isValidFileUrl: Bool {
         return URL(string: self)?.isFileURL ?? false
     }
 
@@ -199,7 +199,7 @@ public extension String {
     ///        "123".isNumeric -> true
     ///        "abc".isNumeric -> false
     ///
-    public var isNumeric: Bool {
+    var isNumeric: Bool {
         let hasLetters = rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
         let hasNumbers = rangeOfCharacter(from: .decimalDigits, options: .literal, range: nil) != nil
         return !hasLetters && hasNumbers
@@ -209,7 +209,7 @@ public extension String {
     ///
     ///        "101".int -> 101
     ///
-    public var int: Int? {
+    var int: Int? {
         return Int(self)
     }
 
@@ -217,7 +217,7 @@ public extension String {
     ///
     ///        "   hello  \n".trimmed -> "hello"
     ///
-    public var trimmed: String {
+    var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
@@ -225,7 +225,7 @@ public extension String {
     ///
     ///        "it's%20easy%20to%20decode%20strings".urlDecoded -> "it's easy to decode strings"
     ///
-    public var urlDecoded: String {
+    var urlDecoded: String {
         return removingPercentEncoding ?? self
     }
 
@@ -233,12 +233,12 @@ public extension String {
     ///
     ///        "it's easy to encode strings".urlEncoded -> "it's%20easy%20to%20encode%20strings"
     ///
-    public var urlEncoded: String {
+    var urlEncoded: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
 
     /// Array of characters of a string.
-    public var charactersArray: [Character] {
+    var charactersArray: [Character] {
         return Array(self)
     }
 
@@ -248,7 +248,7 @@ public extension String {
     ///
     /// - Parameter length: number of characters in string.
     /// - Returns: random string of given length.
-    public static func random(ofLength length: Int) -> String {
+    static func random(ofLength length: Int) -> String {
         guard length > 0 else { return "" }
         let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomString = ""
@@ -265,7 +265,7 @@ public extension String {
     ///        String(randomOfLength: 10) -> "gY8r3MHvlQ"
     ///
     /// - Parameter length: number of characters in string.
-    public init(randomOfLength length: Int) {
+    init(randomOfLength length: Int) {
         self = String.random(ofLength: length)
     }
 
@@ -273,7 +273,7 @@ public extension String {
     ///
     /// - Parameter length: number of characters to limit lorem ipsum to (default is 445 - full lorem ipsum).
     /// - Returns: Lorem ipsum dolor sit amet... string.
-    public static func loremIpsum(ofLength length: Int = 445) -> String {
+    static func loremIpsum(ofLength length: Int = 445) -> String {
         guard length > 0 else { return "" }
 
         // https://www.lipsum.com/
@@ -290,7 +290,7 @@ public extension String {
     ///
     ///        "Hello world".localized -> Hallo Welt
     ///
-    public func localized(comment: String = "") -> String {
+    func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
 
@@ -299,7 +299,7 @@ public extension String {
     ///        "Hello".firstCharacterAsString -> Optional("H")
     ///        "".firstCharacterAsString -> nil
     ///
-    public var firstCharacterAsString: String? {
+    var firstCharacterAsString: String? {
         guard let first = first else { return nil }
         return String(first)
     }
@@ -309,7 +309,7 @@ public extension String {
     ///        "Hello".lastCharacterAsString -> Optional("o")
     ///        "".lastCharacterAsString -> nil
     ///
-    public var lastCharacterAsString: String? {
+    var lastCharacterAsString: String? {
         guard let last = last else { return nil }
         return String(last)
     }
@@ -319,7 +319,7 @@ public extension String {
     ///        "Swift is amazing".toSlug() -> "swift-is-amazing"
     ///
     /// - Returns: The string in slug format.
-    public func toSlug() -> String {
+    func toSlug() -> String {
         let lowercased = self.lowercased()
         let withDashes = lowercased.replacingOccurrences(of: " ", with: "-")
 
@@ -346,7 +346,7 @@ public extension String {
     ///        "Swift is amazing".words() -> ["Swift", "is", "amazing"]
     ///
     /// - Returns: The words contained in a string.
-    public func words() -> [String] {
+    func words() -> [String] {
         // https://stackoverflow.com/questions/42822838
         let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
         let comps = components(separatedBy: chararacterSet)
@@ -358,7 +358,7 @@ public extension String {
     ///        "Swift is amazing".wordsCount() -> 3
     ///
     /// - Returns: The count of words contained in a string.
-    public func wordCount() -> Int {
+    func wordCount() -> Int {
         // https://stackoverflow.com/questions/42822838
         let chararacterSet = CharacterSet.whitespacesAndNewlines.union(.punctuationCharacters)
         let comps = components(separatedBy: chararacterSet)
@@ -372,7 +372,7 @@ public extension String {
     ///        str.camelize()
     ///        print(str) // prints "someVariableName"
     ///
-    public mutating func camelize() {
+    mutating func camelize() {
         let source = lowercased()
         let first = source[..<source.index(after: source.startIndex)]
         if source.contains(" ") {
@@ -388,7 +388,7 @@ public extension String {
     }
 
     /// Check if string contains only unique characters.
-    public func hasUniqueCharacters() -> Bool {
+    func hasUniqueCharacters() -> Bool {
         guard count > 0 else { return false }
         var uniqueChars = Set<String>()
         for char in self {
@@ -407,7 +407,7 @@ public extension String {
     /// - Parameters:
     ///   - toLength: maximum number of characters before cutting.
     ///   - trailing: string to add at the end of truncated string (default is "...").
-    public mutating func truncate(toLength length: Int, trailing: String? = "...") {
+    mutating func truncate(toLength length: Int, trailing: String? = "...") {
         guard length > 0 else { return }
         if count > length {
             self = self[startIndex..<index(startIndex, offsetBy: length)] + (trailing ?? "")
@@ -423,7 +423,7 @@ public extension String {
     ///   - toLength: maximum number of characters before cutting.
     ///   - trailing: string to add at the end of truncated string.
     /// - Returns: truncated string (this is an extr...).
-    public func truncated(toLength length: Int, trailing: String? = "...") -> String {
+    func truncated(toLength length: Int, trailing: String? = "...") -> String {
         guard 1..<count ~= length else { return self }
         return self[startIndex..<index(startIndex, offsetBy: length)] + (trailing ?? "")
     }
@@ -434,7 +434,7 @@ public extension String {
     ///        str.urlDecode()
     ///        print(str) // prints "it's easy to decode strings"
     ///
-    public mutating func urlDecode() {
+    mutating func urlDecode() {
         if let decoded = removingPercentEncoding {
             self = decoded
         }
@@ -446,7 +446,7 @@ public extension String {
     ///        str.urlEncode()
     ///        print(str) // prints "it's%20easy%20to%20encode%20strings"
     ///
-    public mutating func urlEncode() {
+    mutating func urlEncode() {
         if let encoded = addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
             self = encoded
         }
@@ -459,27 +459,27 @@ public extension String {
 public extension String {
 
     /// NSString from a string.
-    public var nsString: NSString {
+    var nsString: NSString {
         return NSString(string: self)
     }
 
     /// NSString pathExtension.
-    public var pathExtension: String {
+    var pathExtension: String {
         return (self as NSString).pathExtension
     }
 
     /// NSString deletingLastPathComponent.
-    public var deletingLastPathComponent: String {
+    var deletingLastPathComponent: String {
         return (self as NSString).deletingLastPathComponent
     }
 
     /// NSString deletingPathExtension.
-    public var deletingPathExtension: String {
+    var deletingPathExtension: String {
         return (self as NSString).deletingPathExtension
     }
 
     /// NSString pathComponents.
-    public var pathComponents: [String] {
+    var pathComponents: [String] {
         return (self as NSString).pathComponents
     }
 
@@ -487,7 +487,7 @@ public extension String {
     ///
     /// - Parameter str: the path component to append to the receiver.
     /// - Returns: a new string made by appending aString to the receiver, preceded if necessary by a path separator.
-    public func appendingPathComponent(_ str: String) -> String {
+    func appendingPathComponent(_ str: String) -> String {
         return (self as NSString).appendingPathComponent(str)
     }
 
@@ -495,7 +495,7 @@ public extension String {
     ///
     /// - Parameter str: The extension to append to the receiver.
     /// - Returns: a new string made by appending to the receiver an extension separator followed by ext (if applicable).
-    public func appendingPathExtension(_ str: String) -> String? {
+    func appendingPathExtension(_ str: String) -> String? {
         return (self as NSString).appendingPathExtension(str)
     }
 

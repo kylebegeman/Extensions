@@ -17,7 +17,7 @@ public extension UITextField {
     /// - emailAddress: UITextField is used to enter email addresses.
     /// - password: UITextField is used to enter passwords.
     /// - generic: UITextField is used to enter generic text.
-    public enum TextType {
+    enum TextType {
         case emailAddress
         case password
         case generic
@@ -30,7 +30,7 @@ public extension UITextField {
 public extension UITextField {
 
     /// Set textField for common text types.
-    public var textType: TextType {
+    var textType: TextType {
         get {
             if keyboardType == .emailAddress {
                 return .emailAddress
@@ -63,7 +63,7 @@ public extension UITextField {
     }
 
     /// Check if text field is empty.
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return text?.isEmpty == true
     }
 
@@ -75,7 +75,7 @@ public extension UITextField {
     ///        textField.text = "swifterswift"
     ///        textField.hasValidEmail -> false
     ///
-    public var hasValidEmail: Bool {
+    var hasValidEmail: Bool {
         // http://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
         guard let text = text, !text.isEmpty else {
             return false
@@ -93,7 +93,7 @@ public extension UITextField {
 public extension UITextField {
 
     /// Clear text.
-    public func clear() {
+    func clear() {
         text = ""
         attributedText = NSAttributedString(string: "")
     }
@@ -101,7 +101,7 @@ public extension UITextField {
     /// Set placeholder text color.
     ///
     /// - Parameter color: placeholder text color.
-    public func setPlaceHolderTextColor(_ color: UIColor) {
+    func setPlaceHolderTextColor(_ color: UIColor) {
         guard let holder = placeholder, !holder.isEmpty else { return }
         self.attributedPlaceholder = NSAttributedString(string: holder, attributes: [.foregroundColor: color])
     }
@@ -109,7 +109,7 @@ public extension UITextField {
     /// Add padding to the left of the textfield rect.
     ///
     /// - Parameter padding: amount of padding to apply to the left of the textfield rect.
-    public func addPaddingLeft(_ padding: CGFloat) {
+    func addPaddingLeft(_ padding: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: frame.height))
         leftView = paddingView
         leftViewMode = .always
@@ -120,7 +120,7 @@ public extension UITextField {
     /// - Parameters:
     ///   - image: left image
     ///   - padding: amount of padding between icon and the left of textfield
-    public func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat) {
+    func addPaddingLeftIcon(_ image: UIImage, padding: CGFloat) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .center
         self.leftView = imageView

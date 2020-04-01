@@ -13,7 +13,7 @@ import UIKit
 public extension UIView {
 
     /// Border color of view; also inspectable from Storyboard.
-    @IBInspectable public var borderColor: UIColor? {
+    @IBInspectable var borderColor: UIColor? {
         get {
             guard let color = layer.borderColor else { return nil }
             return UIColor(cgColor: color)
@@ -28,13 +28,13 @@ public extension UIView {
     }
 
     /// Border width of view; also inspectable from Storyboard.
-    @IBInspectable public var borderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get { return layer.borderWidth }
         set { layer.borderWidth = newValue }
     }
 
     /// Corner radius of view; also inspectable from Storyboard.
-    @IBInspectable public var cornerRadius: CGFloat {
+    @IBInspectable var cornerRadius: CGFloat {
         get { return layer.cornerRadius }
         set {
             layer.masksToBounds = true
@@ -43,7 +43,7 @@ public extension UIView {
     }
 
     /// Shadow color of view; also inspectable from Storyboard.
-    @IBInspectable public var shadowColor: UIColor? {
+    @IBInspectable var shadowColor: UIColor? {
         get {
             guard let color = layer.shadowColor else { return nil }
             return UIColor(cgColor: color)
@@ -52,25 +52,25 @@ public extension UIView {
     }
 
     /// Shadow offset of view; also inspectable from Storyboard.
-    @IBInspectable public var shadowOffset: CGSize {
+    @IBInspectable var shadowOffset: CGSize {
         get { return layer.shadowOffset }
         set { layer.shadowOffset = newValue }
     }
 
     /// Shadow opacity of view; also inspectable from Storyboard.
-    @IBInspectable public var shadowOpacity: Float {
+    @IBInspectable var shadowOpacity: Float {
         get { return layer.shadowOpacity }
         set { layer.shadowOpacity = newValue }
     }
 
     /// Shadow radius of view; also inspectable from Storyboard.
-    @IBInspectable public var shadowRadius: CGFloat {
+    @IBInspectable var shadowRadius: CGFloat {
         get { return layer.shadowRadius }
         set { layer.shadowRadius = newValue }
     }
 
     /// Take screenshot of view (if applicable).
-    public var screenshot: UIImage? {
+    var screenshot: UIImage? {
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, 0)
         defer {
             UIGraphicsEndImageContext()
@@ -82,43 +82,43 @@ public extension UIView {
     }
 
     /// Height of view.
-    public var height: CGFloat {
+    var height: CGFloat {
         get { return frame.size.height }
         set { frame.size.height = newValue }
     }
 
     /// Width of view.
-    public var width: CGFloat {
+    var width: CGFloat {
         get { return frame.size.width }
         set { frame.size.width = newValue }
     }
 
     /// x origin of view.
-    public var x: CGFloat {
+    var x: CGFloat {
         get { return frame.origin.x }
         set { frame.origin.x = newValue }
     }
 
     /// y origin of view.
-    public var y: CGFloat {
+    var y: CGFloat {
         get { return frame.origin.y }
         set { frame.origin.y = newValue }
     }
 
     /// Getter and setter for the x coordinate of leftmost edge of the view.
-    public var left: CGFloat {
+    var left: CGFloat {
         get { return self.x }
         set(value) { self.x = value }
     }
 
     /// Getter and setter for the x coordinate of the rightmost edge of the view.
-    public var right: CGFloat {
+    var right: CGFloat {
         get { return self.x + self.width }
         set(value) { self.x = value - self.width }
     }
 
     /// Getter and setter for the y coordinate for the topmost edge of the view.
-    public var top: CGFloat {
+    var top: CGFloat {
         get {
             return self.y
         } set(value) {
@@ -127,19 +127,19 @@ public extension UIView {
     }
 
     /// Getter and setter for the y coordinate of the bottom most edge of the view.
-    public var bottom: CGFloat {
+    var bottom: CGFloat {
         get { return self.y + self.height }
         set(value) { self.y = value - self.height }
     }
 
     /// Getter and setter the frame's origin point of the view.
-    public var origin: CGPoint {
+    var origin: CGPoint {
         get { return self.frame.origin }
         set(value) { self.frame = CGRect(origin: value, size: self.frame.size) }
     }
 
     /// Get view's parent view controller
-    public var parentViewController: UIViewController? {
+    var parentViewController: UIViewController? {
         weak var parentResponder: UIResponder? = self
         while parentResponder != nil {
             parentResponder = parentResponder!.next
@@ -160,7 +160,7 @@ public extension UIView {
 
 public extension UIView {
     /// Represents the sides of a view.
-    public enum ViewSide {
+    enum ViewSide {
         case top
         case right
         case bottom
@@ -183,24 +183,24 @@ public extension UIView {
     ///   - name: nib name.
     ///   - bundle: bundle of nib (default is nil).
     /// - Returns: optional UIView (if applicable).
-    public class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
+    class func loadFromNib(named name: String, bundle: Bundle? = nil) -> UIView? {
         return UINib(nibName: name, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }
 
     /// Add array of subviews to view.
     ///
     /// - Parameter subviews: array of subviews to add to self.
-    public func addSubviews(_ subviews: [UIView]) {
+    func addSubviews(_ subviews: [UIView]) {
         subviews.forEach({self.addSubview($0)})
     }
 
     /// Remove all subviews in view.
-    public func removeSubviews() {
+    func removeSubviews() {
         subviews.forEach({$0.removeFromSuperview()})
     }
 
     /// SwifterSwift: Remove all gesture recognizers from view.
-    public func removeGestureRecognizers() {
+    func removeGestureRecognizers() {
         gestureRecognizers?.forEach(removeGestureRecognizer)
     }
 
@@ -209,7 +209,7 @@ public extension UIView {
     /// - Parameters:
     ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
     ///   - radius: radius for selected corners.
-    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: bounds,
                                     byRoundingCorners: corners,
                                     cornerRadii: CGSize(width: radius, height: radius))
@@ -222,7 +222,7 @@ public extension UIView {
     ///
     /// - Parameters:
     ///   - radius: radius for selected corners.
-    public func roundAllCorners(radius: CGFloat) {
+    func roundAllCorners(radius: CGFloat) {
         self.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: radius)
     }
 
@@ -233,7 +233,7 @@ public extension UIView {
     ///   - radius: shadow radius (default is 3).
     ///   - offset: shadow offset (default is .zero).
     ///   - opacity: shadow opacity (default is 0.5).
-    public func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
+    func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
         layer.shadowColor = color.cgColor
         layer.shadowOffset = offset
         layer.shadowRadius = radius
@@ -246,7 +246,7 @@ public extension UIView {
     /// - Parameters:
     ///   - thickness: thickness of the border layer.
     ///   - color: background color of the border layer.
-    public func addBorder(thickness: CGFloat, color: UIColor) {
+    func addBorder(thickness: CGFloat, color: UIColor) {
         layer.borderWidth = width
         layer.borderColor = color.cgColor
         layer.masksToBounds = true
@@ -264,7 +264,7 @@ public extension UIView {
     ///   - topOffset: offset from the type.
     ///   - bottomOffset: offset from the bottom.
     /// - Returns: CALayer object representing the new border.
-    public func addBorder(side: ViewSide,
+    func addBorder(side: ViewSide,
                              thickness: CGFloat,
                              color: UIColor,
                              leftOffset: CGFloat = 0,
@@ -325,7 +325,7 @@ public extension UIView {
     /// - Parameters:
     ///   - borderColor: color of the border (default .red).
     ///   - borderWidth: width of the border (default 1.0).
-    public func setDebugMode(borderColor: UIColor = .red, borderWidth: CGFloat = 1.0) {
+    func setDebugMode(borderColor: UIColor = .red, borderWidth: CGFloat = 1.0) {
         self.borderColor = borderColor
         self.borderWidth = borderWidth
     }
@@ -333,7 +333,7 @@ public extension UIView {
     /// An additional way to convert a UIView into and image object.
     ///
     /// - Returns: UIImage representation of the UIView.
-    public func toImage () -> UIImage {
+    func toImage () -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
         drawHierarchy(in: bounds, afterScreenUpdates: false)
         let img = UIGraphicsGetImageFromCurrentImageContext()

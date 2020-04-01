@@ -235,6 +235,7 @@
 				TargetAttributes = {
 					E6F40D7F21E6B2EB00C2E404 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -244,6 +245,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E6F40D7621E6B2EB00C2E404;
 			productRefGroup = E6F40D8121E6B2EB00C2E404 /* Products */;
@@ -454,7 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.begeman.kyle.Extensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -479,7 +481,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.begeman.kyle.Extensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

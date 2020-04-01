@@ -13,7 +13,7 @@ import UIKit
 public extension UIViewController {
 
     /// Check if ViewController is onscreen and not hidden.
-    public var isVisible: Bool {
+    var isVisible: Bool {
         // http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
         return self.isViewLoaded && view.window != nil
     }
@@ -29,19 +29,19 @@ public extension UIViewController {
     /// - Parameters:
     ///   - name: notification name.
     ///   - selector: selector to run with notified.
-    public func addNotificationObserver(name: Notification.Name, selector: Selector) {
+    func addNotificationObserver(name: Notification.Name, selector: Selector) {
         NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
 
     /// Unassign as listener to notification.
     ///
     /// - Parameter name: notification name.
-    public func removeNotificationObserver(name: Notification.Name) {
+    func removeNotificationObserver(name: Notification.Name) {
         NotificationCenter.default.removeObserver(self, name: name, object: nil)
     }
 
     /// Unassign as listener from all notifications.
-    public func removeNotificationsObserver() {
+    func removeNotificationsObserver() {
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -66,27 +66,27 @@ public extension UIViewController {
     }
 
     /// Pushes a view controller onto the receiver’s stack and updates the display.
-    public func push(_ vc: UIViewController) {
+    func push(_ vc: UIViewController) {
         navigationController?.pushViewController(vc, animated: true)
     }
 
     /// Pops the top view controller from the navigation stack and updates the display.
-    public func pop() {
+    func pop() {
         _ = navigationController?.popViewController(animated: true)
     }
 
     /// Added extension for popToRootViewController
-    public func popToRoot() {
+    func popToRoot() {
         _ = navigationController?.popToRootViewController(animated: true)
     }
 
     /// Presents a view controller modally.
-    public func present(_ vc: UIViewController) {
+    func present(_ vc: UIViewController) {
         present(vc, animated: true, completion: nil)
     }
 
     /// Dismisses the view controller that was presented modally by the view controller.
-    public func dismiss(completion: (() -> Void)? = nil) {
+    func dismiss(completion: (() -> Void)? = nil) {
         dismiss(animated: true, completion: completion)
     }
 
