@@ -16,7 +16,7 @@ public extension Character {
     ///        Character("1").isNumber -> true
     ///        Character("a").isNumber -> false
     ///
-    public var isNumber: Bool {
+    var isNumber: Bool {
         return Int(String(self)) != nil
     }
 
@@ -25,7 +25,7 @@ public extension Character {
     ///        Character("4").isLetter -> false
     ///        Character("a").isLetter -> true
     ///
-    public var isLetter: Bool {
+    var isLetter: Bool {
         return String(self).rangeOfCharacter(from: .letters, options: .numeric, range: nil) != nil
     }
 
@@ -34,7 +34,7 @@ public extension Character {
     ///        Character("a").isUppercased -> false
     ///        Character("A").isUppercased -> true
     ///
-    public var isUppercased: Bool {
+    var isUppercased: Bool {
         return String(self) == String(self).uppercased()
     }
 
@@ -43,7 +43,7 @@ public extension Character {
     ///        Character("a").isLowercased -> true
     ///        Character("A").isLowercased -> false
     ///
-    public var isLowercased: Bool {
+    var isLowercased: Bool {
         return String(self) == String(self).lowercased()
     }
 
@@ -52,7 +52,7 @@ public extension Character {
     ///        Character(" ").isWhiteSpace -> true
     ///        Character("A").isWhiteSpace -> false
     ///
-    public var isWhiteSpace: Bool {
+    var isWhiteSpace: Bool {
         return String(self) == " "
     }
 
@@ -61,7 +61,7 @@ public extension Character {
     ///        Character("1").int -> 1
     ///        Character("A").int -> nil
     ///
-    public var int: Int? {
+    var int: Int? {
         return Int(String(self))
     }
 
@@ -69,7 +69,7 @@ public extension Character {
     ///
     ///        Character("a").string -> "a"
     ///
-    public var string: String {
+    var string: String {
         return String(self)
     }
 

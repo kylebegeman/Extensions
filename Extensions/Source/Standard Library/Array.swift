@@ -20,7 +20,7 @@ public extension Array {
     ///
     /// - Parameter index: index of element.
     /// - Returns: optional element (if exists).
-    public func item(at index: Int) -> Element? {
+    func item(at index: Int) -> Element? {
         guard startIndex..<endIndex ~= index else { return nil }
         return self[index]
     }
@@ -33,7 +33,7 @@ public extension Array {
     /// - Parameters:
     ///   - index: index of first element.
     ///   - otherIndex: index of other element.
-    public mutating func safeSwap(from index: Int, to otherIndex: Int) {
+    mutating func safeSwap(from index: Int, to otherIndex: Int) {
         guard index != otherIndex,
             startIndex..<endIndex ~= index,
             startIndex..<endIndex ~= otherIndex else { return }
@@ -46,7 +46,7 @@ public extension Array {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: first index where the specified condition evaluates to true. (optional)
-    public func firstIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
+    func firstIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
         for (index, value) in lazy.enumerated() {
             if try condition(value) { return index }
         }
@@ -59,7 +59,7 @@ public extension Array {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: last index where the specified condition evaluates to true. (optional)
-    public func lastIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
+    func lastIndex(where condition: (Element) throws -> Bool) rethrows -> Int? {
         for (index, value) in lazy.enumerated().reversed() {
             if try condition(value) { return index }
         }
@@ -72,7 +72,7 @@ public extension Array {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: number of times the condition evaluated to true.
-    public func count(where condition: (Element) throws -> Bool) rethrows -> Int {
+    func count(where condition: (Element) throws -> Bool) rethrows -> Int {
         var count = 0
         for element in self {
             if try condition(element) { count += 1 }
@@ -87,7 +87,7 @@ public extension Array {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: true when all elements in the array match the specified condition.
-    public func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         return try !contains { try !condition($0) }
     }
 
@@ -98,7 +98,7 @@ public extension Array {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: true when no elements in the array match the specified condition.
-    public func none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    func none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         return try !contains { try condition($0) }
     }
 
@@ -107,7 +107,7 @@ public extension Array {
     ///        [0, 2, 4, 7].forEachReversed({ print($0)}) -> //Order of print: 7,4,2,0
     ///
     /// - Parameter body: a closure that takes an element of the array as a parameter.
-    public func forEachReversed(_ body: (Element) throws -> Void) rethrows {
+    func forEachReversed(_ body: (Element) throws -> Void) rethrows {
         try reversed().forEach { try body($0) }
     }
 
@@ -118,7 +118,7 @@ public extension Array {
     /// - Parameters:
     ///   - condition: condition to evaluate each element against.
     ///   - body: a closure that takes an element of the array as a parameter.
-    public func forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
+    func forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
         for element in self where try condition(element) {
             try body(element)
         }
@@ -137,7 +137,7 @@ public extension Array where Element: Numeric {
 
      - Returns: sum of the array's elements.
      */
-    public func sum() -> Element {
+    func sum() -> Element {
         var total: Element = 0
         for i in 0..<count {
             total += self[i]
@@ -154,7 +154,7 @@ public extension Array where Element: FloatingPoint {
     ///        [1.2, 2.3, 4.5, 3.4, 4.5].average() = 3.18
     ///
     /// - Returns: average of the array's elements.
-    public func average() -> Element {
+    func average() -> Element {
         guard !isEmpty else { return 0 }
         var total: Element = 0
         for i in 0..<count {
@@ -177,7 +177,7 @@ public extension Array where Element: Equatable {
     ///
     /// - Parameter elements: array of elements to check.
     /// - Returns: true if array contains all given items.
-    public func contains(_ elements: [Element]) -> Bool {
+    func contains(_ elements: [Element]) -> Bool {
         guard !elements.isEmpty else { return true }
         var found = true
         for element in elements {
@@ -194,7 +194,7 @@ public extension Array where Element: Equatable {
     ///        ["h", "e", "l", "l", "o"].removeAll("l") -> ["h", "e", "o"]
     ///
     /// - Parameter item: item to remove.
-    public mutating func removeAll(_ item: Element) {
+    mutating func removeAll(_ item: Element) {
         self = filter { $0 != item }
     }
 
@@ -204,7 +204,7 @@ public extension Array where Element: Equatable {
     ///        ["h", "e", "l", "l", "o"].removeAll(["l", "h"]) -> ["e", "o"]
     ///
     /// - Parameter items: items to remove.
-    public mutating func removeAll(_ items: [Element]) {
+    mutating func removeAll(_ items: [Element]) {
         guard !items.isEmpty else { return }
         self = filter { !items.contains($0) }
     }
@@ -214,7 +214,7 @@ public extension Array where Element: Equatable {
     ///        [1, 2, 2, 3, 4, 5].removeDuplicates() -> [1, 2, 3, 4, 5]
     ///        ["h", "e", "l", "l", "o"]. removeDuplicates() -> ["h", "e", "l", "o"]
     ///
-    public mutating func removeDuplicates() {
+    mutating func removeDuplicates() {
         // Thanks to https://github.com/sairamkotha for improving the method
         self = reduce(into: [Element]()) {
             if !$0.contains($1) {
@@ -230,7 +230,7 @@ public extension Array where Element: Equatable {
     ///
     /// - Returns: an array of unique elements.
     ///
-    public func duplicatesRemoved() -> [Element] {
+    func duplicatesRemoved() -> [Element] {
         // Thanks to https://github.com/sairamkotha for improving the property
         return reduce(into: [Element]()) {
             if !$0.contains($1) {

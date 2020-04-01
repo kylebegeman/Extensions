@@ -16,7 +16,7 @@ public extension UIApplication {
     ///
     /// - Parameter base: the base controller to check; defaults to the key window's root view controller
     /// - Returns: the top most view controller
-    public class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
         }

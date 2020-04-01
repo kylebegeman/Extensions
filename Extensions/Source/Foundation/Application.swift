@@ -13,24 +13,24 @@ import UIKit
 public struct Application {
 
     /// App's name (if applicable).
-    public static var appDisplayName: String? {
+    static var appDisplayName: String? {
         // http://stackoverflow.com/questions/28254377/get-app-name-in-swift
         return Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String
     }
 
     /// App's bundle ID (if applicable).
-    public static var appBundleID: String? {
+    static var appBundleID: String? {
         return Bundle.main.bundleIdentifier
     }
 
     /// App current build number (if applicable).
-    public static var appBuild: String? {
+    static var appBuild: String? {
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
     }
 
     #if os(iOS) || os(tvOS)
     /// Application icon badge current number.
-    public static var applicationIconBadgeNumber: Int {
+    static var applicationIconBadgeNumber: Int {
         get {
             return UIApplication.shared.applicationIconBadgeNumber
         }
@@ -41,24 +41,24 @@ public struct Application {
     #endif
 
     /// App's current version (if applicable).
-    public static var appVersion: String? {
+    static var appVersion: String? {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
     #if os(iOS) || os(tvOS)
     /// Shared instance of current device.
-    public static var currentDevice: UIDevice {
+    static var currentDevice: UIDevice {
         return UIDevice.current
     }
     #elseif os(watchOS)
     /// Shared instance of current device.
-    public static var currentDevice: WKInterfaceDevice {
+    static var currentDevice: WKInterfaceDevice {
         return WKInterfaceDevice.current()
     }
     #endif
 
     /// Screen height.
-    public static var screenHeight: CGFloat {
+    static var screenHeight: CGFloat {
         #if os(iOS)
             return UIScreen.main.bounds.height
         #elseif os(watchOS)
@@ -67,7 +67,7 @@ public struct Application {
     }
 
     /// Screen width.
-    public static var screenWidth: CGFloat {
+    static var screenWidth: CGFloat {
         #if os(iOS) || os(tvOS)
             return UIScreen.main.bounds.width
         #elseif os(watchOS)
@@ -76,12 +76,12 @@ public struct Application {
     }
 
     /// Current device name.
-    public static var deviceName: String {
+    static var deviceName: String {
         return currentDevice.name
     }
 
     /// Check if app is running in debug mode.
-    public static var isInDebuggingMode: Bool {
+    static var isInDebuggingMode: Bool {
         // http://stackoverflow.com/questions/9063100/xcode-ios-how-to-determine-whether-code-is-running-in-debug-release-build
         #if DEBUG
             return true
@@ -92,12 +92,12 @@ public struct Application {
 
     #if os(iOS)
     /// Check if multitasking is supported in current device.
-    public static var isMultitaskingSupported: Bool {
+    static var isMultitaskingSupported: Bool {
         return UIDevice.current.isMultitaskingSupported
     }
 
     /// Current status bar network activity indicator state.
-    public static var isNetworkActivityIndicatorVisible: Bool {
+    static var isNetworkActivityIndicatorVisible: Bool {
         get {
             return UIApplication.shared.isNetworkActivityIndicatorVisible
         }
@@ -107,30 +107,30 @@ public struct Application {
     }
 
     /// Check if device is iPhone.
-    public static var isPhone: Bool {
+    static var isPhone: Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
 
     /// Check if device is iPad.
-    public static var isPad: Bool {
+    static var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
 
     /// Current orientation of device.
-    public static var deviceOrientation: UIDeviceOrientation {
+    static var deviceOrientation: UIDeviceOrientation {
         return currentDevice.orientation
     }
     #endif
 
     #if os(iOS) || os(tvOS)
     /// Check if device is registered for remote notifications for current app (read-only).
-    public static var isRegisteredForRemoteNotifications: Bool {
+    static var isRegisteredForRemoteNotifications: Bool {
         return UIApplication.shared.isRegisteredForRemoteNotifications
     }
     #endif
 
     /// Check if application is running on simulator (read-only).
-    public static var isRunningOnSimulator: Bool {
+    static var isRunningOnSimulator: Bool {
         // http://stackoverflow.com/questions/24869481/detect-if-app-is-being-built-for-device-or-simulator-in-swift
         #if targetEnvironment(simulator)
             return true
@@ -140,7 +140,7 @@ public struct Application {
     }
 
     /// System current version (read-only).
-    public static var systemVersion: String {
+    static var systemVersion: String {
         return currentDevice.systemVersion
     }
 }
@@ -156,7 +156,7 @@ public extension Application {
     ///   - queue: a queue that completion closure should be executed on (default is DispatchQueue.main).
     ///   - completion: closure to be executed after delay.
     ///   - Returns: DispatchWorkItem task. You can call .cancel() on it to cancel delayed execution.
-    @discardableResult public static func delay(milliseconds: Double, queue: DispatchQueue = .main, completion: @escaping () -> Void) -> DispatchWorkItem {
+    @discardableResult static func delay(milliseconds: Double, queue: DispatchQueue = .main, completion: @escaping () -> Void) -> DispatchWorkItem {
         let task = DispatchWorkItem { completion() }
         queue.asyncAfter(deadline: .now() + (milliseconds/1000), execute: task)
         return task
@@ -169,7 +169,7 @@ public extension Application {
     ///   - queue: a queue that completion closure should be executed on (default is DispatchQueue.main).
     ///   - completion: closure to be executed after delay.
     ///   - Returns: DispatchWorkItem task. You can call .cancel() on it to cancel delayed execution.
-    @discardableResult public static func delay(seconds: Double, queue: DispatchQueue = .main, completion: @escaping () -> Void) -> DispatchWorkItem {
+    @discardableResult static func delay(seconds: Double, queue: DispatchQueue = .main, completion: @escaping () -> Void) -> DispatchWorkItem {
         let task = DispatchWorkItem { completion() }
         queue.asyncAfter(deadline: .now() + seconds, execute: task)
         return task

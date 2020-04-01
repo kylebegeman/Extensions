@@ -17,7 +17,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: true when all elements in the array match the specified condition.
-    public func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    func all(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         return try !contains { try !condition($0) }
     }
 
@@ -28,7 +28,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: true when no elements in the array match the specified condition.
-    public func none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    func none(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         return try !contains { try condition($0) }
     }
 
@@ -39,7 +39,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: true when no elements in the array match the specified condition.
-    public func any(matching condition: (Element) throws -> Bool) rethrows -> Bool {
+    func any(matching condition: (Element) throws -> Bool) rethrows -> Bool {
         return try contains { try condition($0) }
     }
 
@@ -49,7 +49,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: the last element in the array matching the specified condition. (optional)
-    public func last(where condition: (Element) throws -> Bool) rethrows -> Element? {
+    func last(where condition: (Element) throws -> Bool) rethrows -> Element? {
         for element in reversed() {
             if try condition(element) { return element }
         }
@@ -62,7 +62,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: to evaluate the exclusion of an element from the array.
     /// - Returns: the array with rejected values filtered from it.
-    public func reject(where condition: (Element) throws -> Bool) rethrows -> [Element] {
+    func reject(where condition: (Element) throws -> Bool) rethrows -> [Element] {
         return try filter { return try !condition($0) }
     }
 
@@ -72,7 +72,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: number of times the condition evaluated to true.
-    public func count(where condition: (Element) throws -> Bool) rethrows -> Int {
+    func count(where condition: (Element) throws -> Bool) rethrows -> Int {
         var count = 0
         for element in self where try condition(element) {
             count += 1
@@ -85,7 +85,7 @@ public extension Sequence {
     ///        [0, 2, 4, 7].forEachReversed({ print($0)}) -> //Order of print: 7,4,2,0
     ///
     /// - Parameter body: a closure that takes an element of the array as a parameter.
-    public func forEachReversed(_ body: (Element) throws -> Void) rethrows {
+    func forEachReversed(_ body: (Element) throws -> Void) rethrows {
         try reversed().forEach(body)
     }
 
@@ -96,7 +96,7 @@ public extension Sequence {
     /// - Parameters:
     ///   - condition: condition to evaluate each element against.
     ///   - body: a closure that takes an element of the array as a parameter.
-    public func forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
+    func forEach(where condition: (Element) throws -> Bool, body: (Element) throws -> Void) rethrows {
         for element in self where try condition(element) {
             try body(element)
         }
@@ -110,7 +110,7 @@ public extension Sequence {
     ///   - initial: initial value.
     ///   - next: closure that combines the accumulating value and next element of the array.
     /// - Returns: an array of the final accumulated value and each interim combination.
-    public func accumulate<U>(initial: U, next: (U, Element) throws -> U) rethrows -> [U] {
+    func accumulate<U>(initial: U, next: (U, Element) throws -> U) rethrows -> [U] {
         var runningTotal = initial
         return try map { element in
             runningTotal = try next(runningTotal, element)
@@ -126,7 +126,7 @@ public extension Sequence {
     ///   - isIncluded: condition of inclusion to evaluate each element against.
     ///   - transform: transform element function to evaluate every element.
     /// - Returns: Return an filtered and mapped array.
-    public func filtered<T>(_ isIncluded: (Element) throws -> Bool, map transform: (Element) throws -> T) rethrows ->  [T] {
+    func filtered<T>(_ isIncluded: (Element) throws -> Bool, map transform: (Element) throws -> T) rethrows ->  [T] {
         return try compactMap({
             if try isIncluded($0) {
                 return try transform($0)
@@ -144,7 +144,7 @@ public extension Sequence {
     ///
     /// - Parameter condition: condition to evaluate each element against.
     /// - Returns: The only element in the array matching the specified condition. If there are more matching elements, nil is returned. (optional)
-    public func single(where condition: ((Element) throws -> Bool)) rethrows -> Element? {
+    func single(where condition: ((Element) throws -> Bool)) rethrows -> Element? {
         var singleElement: Element?
         for element in self where try condition(element) {
             guard singleElement == nil else {
@@ -168,7 +168,7 @@ public extension Sequence where Element: Equatable {
     ///
     /// - Parameter elements: array of elements to check.
     /// - Returns: true if array contains all given items.
-    public func contains(_ elements: [Element]) -> Bool {
+    func contains(_ elements: [Element]) -> Bool {
         guard !elements.isEmpty else { return true }
         for element in elements {
             if !contains(element) {
@@ -185,7 +185,7 @@ public extension Sequence where Element: Hashable {
     /// Check whether a sequence contains duplicates.
     ///
     /// - Returns: true if the receiver contains duplicates.
-    public func containsDuplicates() -> Bool {
+    func containsDuplicates() -> Bool {
         var set = Set<Element>()
         for element in self {
             if !set.insert(element).inserted {
@@ -202,7 +202,7 @@ public extension Sequence where Element: Hashable {
     ///
     /// - Returns: An array of duplicated elements.
     ///
-    public func duplicates() -> [Element] {
+    func duplicates() -> [Element] {
         var set = Set<Element>()
         var duplicates = Set<Element>()
         forEach {
@@ -222,7 +222,7 @@ public extension Sequence where Element: Numeric {
     ///        [1, 2, 3, 4, 5].sum() -> 15
     ///
     /// - Returns: sum of the array's elements.
-    public func sum() -> Element {
+    func sum() -> Element {
         return reduce(0, {$0 + $1})
     }
 

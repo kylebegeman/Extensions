@@ -17,7 +17,7 @@ public extension Collection {
     ///        arr[safe: 10] -> nil
     ///
     /// - Parameter index: index of element to access element.
-    public subscript(safe index: Index) -> Iterator.Element? {
+    subscript(safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
 
@@ -26,7 +26,7 @@ public extension Collection {
 public extension Collection where Index == Int {
 
     /// Random item from array.
-    public var randomItem: Iterator.Element {
+    var randomItem: Iterator.Element {
         let index = Int(arc4random_uniform(UInt32(count)))
         return self[index]
     }

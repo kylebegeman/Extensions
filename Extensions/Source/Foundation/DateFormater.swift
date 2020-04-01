@@ -46,7 +46,7 @@ public extension DateFormatter {
     ///   - date: date to be converted to string.
     ///   - format: the format to define the string outout.
     /// - Returns: a string representation of the passed in date object.
-    public func string(from date: Date, format: DateFormat) -> String {
+    func string(from date: Date, format: DateFormat) -> String {
         self.timeZone = format.timeZone
         self.dateFormat = format.formatString
         self.locale = format.locale
@@ -58,7 +58,7 @@ public extension DateFormatter {
     ///
     /// - Parameter string: string to match the date forat.
     /// - Returns: Date object.
-    public func date(from string: String, format: DateFormat) -> Date? {
+    func date(from string: String, format: DateFormat) -> Date? {
         self.timeZone = format.timeZone
         self.dateFormat = format.formatString
         self.locale = format.locale

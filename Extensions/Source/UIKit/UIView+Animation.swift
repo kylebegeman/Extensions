@@ -14,7 +14,7 @@ public extension UIView {
     ///
     /// - horizontal: Shake left and right.
     /// - vertical: Shake up and down.
-    public enum ShakeDirection {
+    enum ShakeDirection {
         case horizontal /// Shake left and right.
         case vertical   /// Shake up and down.
     }
@@ -23,7 +23,7 @@ public extension UIView {
     ///
     /// - degrees: degrees.
     /// - radians: radians.
-    public enum AngleUnit {
+    enum AngleUnit {
         case degrees /// degrees.
         case radians /// radians.
     }
@@ -34,7 +34,7 @@ public extension UIView {
     /// - easeIn: easeIn animation.
     /// - easeOut: easeOut animation.
     /// - easeInOut: easeInOut animation.
-    public enum ShakeAnimationType {
+    enum ShakeAnimationType {
         case linear     /// linear animation.
         case easeIn     /// easeIn animation.
         case easeOut    /// easeOut animation.
@@ -49,7 +49,7 @@ public extension UIView {
     ///   - animated: set true to animate rotation (default is true).
     ///   - duration: animation duration in seconds (default is 1 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil).
-    public func rotate(byAngle angle: CGFloat, ofType type: AngleUnit, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func rotate(byAngle angle: CGFloat, ofType type: AngleUnit, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, delay: 0, options: .curveLinear, animations: { () -> Void in
@@ -65,7 +65,7 @@ public extension UIView {
     ///   - animated: set true to animate rotation (default is false).
     ///   - duration: animation duration in seconds (default is 1 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil).
-    public func rotate(toAngle angle: CGFloat, ofType type: AngleUnit, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func rotate(toAngle angle: CGFloat, ofType type: AngleUnit, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         let angleWithType = (type == .degrees) ? .pi * angle / 180.0 : angle
         let aDuration = animated ? duration : 0
         UIView.animate(withDuration: aDuration, animations: {
@@ -80,7 +80,7 @@ public extension UIView {
     ///   - animated: set true to animate scaling (default is false).
     ///   - duration: animation duration in seconds (default is 1 second).
     ///   - completion: optional completion handler to run with animation finishes (default is nil).
-    public func scale(by offset: CGPoint, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
+    func scale(by offset: CGPoint, animated: Bool = false, duration: TimeInterval = 1, completion: ((Bool) -> Void)? = nil) {
         if animated {
             UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
                 self.transform = self.transform.scaledBy(x: offset.x, y: offset.y)
@@ -98,7 +98,7 @@ public extension UIView {
     ///   - duration: animation duration in seconds (default is 1 second).
     ///   - animationType: shake animation type (default is .easeOut).
     ///   - completion: optional completion handler to run with animation finishes (default is nil).
-    public func shake(direction: ShakeDirection = .horizontal, duration: TimeInterval = 1, animationType: ShakeAnimationType = .easeOut, completion:(() -> Void)? = nil) {
+    func shake(direction: ShakeDirection = .horizontal, duration: TimeInterval = 1, animationType: ShakeAnimationType = .easeOut, completion:(() -> Void)? = nil) {
         CATransaction.begin()
 
         let animation: CAKeyframeAnimation
@@ -139,7 +139,7 @@ public extension UIView {
     ///     }
     ///     .animate() // Start animations.
     ///
-    public class Animator {
+    class Animator {
         /// Store completion types for the animator.
         public typealias Completion = (Bool) -> Void
         public typealias Animations = () -> Void
@@ -150,7 +150,7 @@ public extension UIView {
         ///
         /// - regular: regular, or, linear animation
         /// - spring: spring based animation with velocity and bounce.
-        public enum AnimationType {
+        enum AnimationType {
             case regular(duration: TimeInterval, delay: TimeInterval, options: UIView.AnimationOptions)
             case spring(duration: TimeInterval, delay: TimeInterval, damping: CGFloat, velocity: CGFloat, options: UIView.AnimationOptions)
         }
@@ -163,17 +163,17 @@ public extension UIView {
         ///  Main initializer that accepts an animation type option.
         ///
         /// - Parameter animationType: the animation type to perform.
-        public init(animationType: AnimationType) {
+        init(animationType: AnimationType) {
             self.animationType = animationType
         }
 
         /// Convenience initializer for Apple SDK continuity.
-        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, options: UIView.AnimationOptions = []) {
+        convenience init(duration: TimeInterval, delay: TimeInterval = 0, options: UIView.AnimationOptions = []) {
             self.init(animationType: .regular(duration: duration, delay: delay, options: options))
         }
 
         /// Convenience initializer for Apple SDK continuity.
-        public convenience init(duration: TimeInterval, delay: TimeInterval = 0, damping: CGFloat, velocity: CGFloat, options: UIView.AnimationOptions = []) {
+        convenience init(duration: TimeInterval, delay: TimeInterval = 0, damping: CGFloat, velocity: CGFloat, options: UIView.AnimationOptions = []) {
             self.init(animationType: .spring(duration: duration, delay: delay, damping: damping, velocity: velocity, options: options))
         }
 
@@ -181,7 +181,7 @@ public extension UIView {
         ///
         /// - Parameter animations: the animation to perform.
         /// - Returns: an instance of self to allow for chained method calls.
-        public func animations(_ animations: @escaping Animations) -> Self {
+        func animations(_ animations: @escaping Animations) -> Self {
             self.animations = animations
             return self
         }
@@ -190,13 +190,13 @@ public extension UIView {
         ///
         /// - Parameter completion: the completion block to be called on completion.
         /// - Returns: an instance of self to allow for changed method calls.
-        public func completion(_ completion: Completion?) -> Self {
+        func completion(_ completion: Completion?) -> Self {
             self.completion = completion
             return self
         }
 
         /// Perform the stored animations using method chaining.
-        public func animate() {
+        func animate() {
             switch self.animationType {
             case let .regular(duration, delay, options):
                 UIView.animate(withDuration: duration,

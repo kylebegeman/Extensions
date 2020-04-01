@@ -13,73 +13,73 @@ import UIKit
 public extension UIButton {
 
     /// Image of disabled state for button; also inspectable from Storyboard.
-    @IBInspectable public var imageForDisabled: UIImage? {
+    @IBInspectable var imageForDisabled: UIImage? {
         get { return image(for: .disabled) }
         set { setImage(newValue, for: .disabled) }
     }
 
     /// Image of highlighted state for button; also inspectable from Storyboard.
-    @IBInspectable public var imageForHighlighted: UIImage? {
+    @IBInspectable var imageForHighlighted: UIImage? {
         get { return image(for: .highlighted) }
         set { setImage(newValue, for: .highlighted) }
     }
 
     /// Image of normal state for button; also inspectable from Storyboard.
-    @IBInspectable public var imageForNormal: UIImage? {
+    @IBInspectable var imageForNormal: UIImage? {
         get { return image(for: .normal) }
         set { setImage(newValue, for: .normal) }
     }
 
     /// Image of selected state for button; also inspectable from Storyboard.
-    @IBInspectable public var imageForSelected: UIImage? {
+    @IBInspectable var imageForSelected: UIImage? {
         get { return image(for: .selected) }
         set { setImage(newValue, for: .selected) }
     }
 
     /// Title color of disabled state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleColorForDisabled: UIColor? {
+    @IBInspectable var titleColorForDisabled: UIColor? {
         get { return titleColor(for: .disabled) }
         set { setTitleColor(newValue, for: .disabled) }
     }
 
     /// Title color of highlighted state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleColorForHighlighted: UIColor? {
+    @IBInspectable var titleColorForHighlighted: UIColor? {
         get { return titleColor(for: .highlighted) }
         set { setTitleColor(newValue, for: .highlighted) }
     }
 
     /// Title color of normal state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleColorForNormal: UIColor? {
+    @IBInspectable var titleColorForNormal: UIColor? {
         get { return titleColor(for: .normal) }
         set { setTitleColor(newValue, for: .normal) }
     }
 
     /// Title color of selected state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleColorForSelected: UIColor? {
+    @IBInspectable var titleColorForSelected: UIColor? {
         get { return titleColor(for: .selected) }
         set { setTitleColor(newValue, for: .selected) }
     }
 
     /// Title of disabled state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleForDisabled: String? {
+    @IBInspectable var titleForDisabled: String? {
         get { return title(for: .disabled) }
         set { setTitle(newValue, for: .disabled) }
     }
 
     /// Title of highlighted state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleForHighlighted: String? {
+    @IBInspectable var titleForHighlighted: String? {
         get { return title(for: .highlighted) }
         set { setTitle(newValue, for: .highlighted) }
     }
 
     /// Title of normal state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleForNormal: String? {
+    @IBInspectable var titleForNormal: String? {
         get { return title(for: .normal) }
         set { setTitle(newValue, for: .normal) }
     }
 
     /// Title of selected state for button; also inspectable from Storyboard.
-    @IBInspectable public var titleForSelected: String? {
+    @IBInspectable var titleForSelected: String? {
         get { return title(for: .selected) }
         set { setTitle(newValue, for: .selected) }
     }
@@ -97,21 +97,21 @@ public extension UIButton {
     /// Set image for all states.
     ///
     /// - Parameter image: UIImage.
-    public func setImageForAllStates(_ image: UIImage) {
+    func setImageForAllStates(_ image: UIImage) {
         states.forEach { self.setImage(image, for: $0) }
     }
 
     /// Set title color for all states.
     ///
     /// - Parameter color: UIColor.
-    public func setTitleColorForAllStates(_ color: UIColor) {
+    func setTitleColorForAllStates(_ color: UIColor) {
         states.forEach { self.setTitleColor(color, for: $0) }
     }
 
     /// Set title for all states.
     ///
     /// - Parameter title: title string.
-    public func setTitleForAllStates(_ title: String) {
+    func setTitleForAllStates(_ title: String) {
         states.forEach { self.setTitle(title, for: $0) }
     }
 

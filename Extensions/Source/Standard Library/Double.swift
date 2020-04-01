@@ -11,27 +11,27 @@ import UIKit
 public extension Double {
 
     /// Int.
-    public var int: Int {
+    var int: Int {
         return Int(self)
     }
 
     /// Float.
-    public var float: Float {
+    var float: Float {
         return Float(self)
     }
 
     /// CGFloat.
-    public var cgFloat: CGFloat {
+    var cgFloat: CGFloat {
         return CGFloat(self)
     }
 
     /// Check if CGFloat is positive.
-    public var isPositive: Bool {
+    var isPositive: Bool {
         return self > 0
     }
 
     /// Check if CGFloat is negative.
-    public var isNegative: Bool {
+    var isNegative: Bool {
         return self < 0
     }
 
